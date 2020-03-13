@@ -26,7 +26,7 @@ class DetectorGeometry(TypedTuple):
 
     @staticmethod
     def _update_init_dict(kwargs):
-        if not kwargs['sample_tilt_angle']:
+        if kwargs['sample_tilt_angle'] is None:
             kwargs['sample_tilt_angle'] = - kwargs['angle_of_incidence']
 
     def __init__(self, *args, **kwargs):
