@@ -2,7 +2,7 @@
 Physical and mathematical constants and conversion functions.
 """
 
-__all__ = 'deg rad eV meV keV nanometer angstrom micrometer millimeter' \
+__all__ = 'deg rad eV meV keV nanometer angstrom micrometer millimeter ' \
           'meter nm mm energy2wavelength wavelength2energy rad2deg deg2rad'.split()
 
 deg: float = 1.
