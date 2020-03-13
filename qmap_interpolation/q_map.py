@@ -12,6 +12,13 @@ class QMap(TypedTuple):
     qz_end: float
     qz_num: int
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        assert self.qz_num > 0, f'Qz axis size should be a positive integer, provided {self.qz_num} instead.'
+        assert self.qxy_num > 0, f'Qxy axis size should be a positive integer, provided {self.qxy_num} instead.'
+        assert self.qxy_start < self.qxy_end, f'qxy_start should be smaller that qxy_end.'
+        assert self.qz_start < self.qz_end, f'qz_start should be smaller that qz_end.'
+
     @classmethod
     def from_step(cls, qxy_end: float, qz_end: float, q_resolution: float):
         qxy_start = 0
