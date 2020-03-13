@@ -13,6 +13,13 @@ class Image(TypedTuple):
     raw_image: ndarray
     detector_geometry: DetectorGeometry
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        assert self.raw_image.shape == self.detector_geometry.shape, \
+            f'Raw image shape should equal to detector size, ' \
+            f'provided: image shape = {self.raw_image.shape}, ' \
+            f'detector shape = {self.detector_geometry.shape}.'
+
     @lazy_property
     def image_vector(self) -> ndarray:
         if self.detector_geometry.mask is not None:
