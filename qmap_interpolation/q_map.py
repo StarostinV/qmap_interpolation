@@ -13,7 +13,7 @@ class QMap(TypedTuple):
     qz_num: int
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__()
         assert self.qz_num > 0, f'Qz axis size should be a positive integer, provided {self.qz_num} instead.'
         assert self.qxy_num > 0, f'Qxy axis size should be a positive integer, provided {self.qxy_num} instead.'
         assert self.qxy_start < self.qxy_end, f'qxy_start should be smaller that qxy_end.'

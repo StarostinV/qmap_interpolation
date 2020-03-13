@@ -1,7 +1,7 @@
 import pytest
-from qmap_interpolation import units
+from qmap_interpolation import nm, mm
 
 
 def test_units():
-    assert units.nanometer == 1
-    assert units.nm == 1
+    assert mm == 1.e+6
+    assert nm == 1

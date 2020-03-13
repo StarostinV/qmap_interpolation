@@ -14,7 +14,7 @@ class Image(TypedTuple):
     detector_geometry: DetectorGeometry
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__()
         assert self.raw_image.shape == self.detector_geometry.shape, \
             f'Raw image shape should equal to detector size, ' \
             f'provided: image shape = {self.raw_image.shape}, ' \

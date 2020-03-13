@@ -14,7 +14,7 @@ class Instrument(TypedTuple):
     hot_pixel_threshold: int = None
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__()
         assert self.wavelength > 0, 'Wavelength should be positive.'
         assert self.pixel_size > 0, f'pixel_size should be a positive number, ' \
                                     f'provided {self.pixel_size} instead.'

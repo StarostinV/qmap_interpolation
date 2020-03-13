@@ -30,7 +30,7 @@ class DetectorGeometry(TypedTuple):
             kwargs['sample_tilt_angle'] = - kwargs['angle_of_incidence']
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__()
         if self.mask is not None:
             assert self.mask.shape == self.shape, 'Mask shape and instrument size are different: ' \
                                                   f'mask shape = {self.mask.shape}, size = {self.shape}.'

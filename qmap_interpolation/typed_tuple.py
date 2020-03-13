@@ -48,6 +48,9 @@ class TypedTuple(object):
     ...        if kwargs['b'] is None:
     ...            kwargs['b'] = kwargs['a']
     ...
+    ...    def __init__(self, *args, **kwargs):
+    ...        super().__init__()
+    ...
     >>> s = AdvancedStructure(1)
     >>> s.b
     1

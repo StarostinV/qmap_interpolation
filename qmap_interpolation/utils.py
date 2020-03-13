@@ -23,7 +23,7 @@ class Size(TypedTuple):
     y: int
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__()
         assert self.z > 0, f'Z size should be a positive integer, provided {self.z} instead.'
         assert self.y > 0, f'Y size should be a positive integer, provided {self.y} instead.'
 
