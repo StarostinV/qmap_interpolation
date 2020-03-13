@@ -24,6 +24,17 @@ class DetectorGeometry(TypedTuple):
     angle_gamma: float = 0
     mask: np.ndarray = None
 
+    @staticmethod
+    def _update_init_dict(kwargs):
+        if not kwargs['sample_tilt_angle']:
+            kwargs['sample_tilt_angle'] = - kwargs['angle_of_incidence']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.mask is not None:
+            assert self.mask.shape == self.shape, 'Mask shape and instrument size are different: ' \
+                                                  f'mask shape = {self.mask.shape}, size = {self.shape}.'
+
     @property
     def wavelength(self) -> float:
         """
@@ -33,16 +44,16 @@ class DetectorGeometry(TypedTuple):
         return self.instrument.wavelength
 
     @lazy_property
+    def shape(self) -> Tuple[int, int]:
+        return self.instrument.size.z, self.instrument.size.y
+
+    @lazy_property
     def k0(self) -> float:
         return 2 * np.pi / self.wavelength
 
     @lazy_property
     def number_of_pixels(self) -> int:
         return self.instrument.size.y * self.instrument.size.z
-
-    def _check_inputs(self) -> None:
-        if self.sample_tilt_angle is None:
-            self.sample_tilt_angle = - self.angle_of_incidence
 
     @lazy_property
     def q_vectors(self):
