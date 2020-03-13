@@ -36,6 +36,21 @@ class TypedTuple(object):
     {'a': 1, 'b': 1, 'c': 'a'}
     >>> s.update(a=2)
     MyStructure(a=2, b=1, c='a')
+
+    The more advanced default behavior can be set via overwriting _update_init_dict staticmethod:
+
+    >>> class AdvancedStructure(TypedTuple):
+    ...    a: int
+    ...    b: int = None
+    ...
+    ...    @staticmethod
+    ...    def _update_init_dict(kwargs):
+    ...        if kwargs['b'] is None:
+    ...            kwargs['b'] = kwargs['a']
+    ...
+    >>> s = AdvancedStructure(1)
+    >>> s.b
+    1
     """
 
     def __new__(cls, *args, **kwargs):
@@ -58,10 +73,16 @@ class TypedTuple(object):
             else:
                 raise ValueError(f'Missing non-default argument {attr_name}.')
 
+        cls._update_init_dict(kwargs)
+
         instance = super().__new__(cls)
         for attr_name, attr_value in kwargs.items():
             setattr(instance, attr_name, attr_value)
         return instance
+
+    @staticmethod
+    def _update_init_dict(kwargs):
+        pass
 
     def __setattr__(self, key, value):
         if key in self.__annotations__ and key in self.__dict__:
