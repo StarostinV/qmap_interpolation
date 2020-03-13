@@ -4,6 +4,5 @@ from .converted_image import ConvertedImage
 from .q_map import QMap
 from .utils import Size, BeamCenter
 from .detector_geometry import DetectorGeometry
-from .units import units
 
-print('qmap imported.')
+from .units import *
